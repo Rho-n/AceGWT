@@ -2,6 +2,8 @@
 
 An integration of the [Ace Editor](http://ace.c9.io/) into [GWT](http://www.gwtproject.org/).  If you want to embed a powerful text editor in a GWT application, AceGWT might be just what you're looking for!
 
+This for is my foray into adding UIBinder support to a GWT widget.
+
 The [wiki](https://github.com/daveho/AceGWT/wiki) has more information, including:
 
 * [Documentation](https://github.com/daveho/AceGWT/wiki/Documentation) on using AceGWT in your application
