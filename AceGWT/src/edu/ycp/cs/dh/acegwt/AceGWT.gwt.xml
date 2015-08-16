@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
   <inherits name='com.google.gwt.user.User'/>
+  <inherits name='edu.ycp.cs.dh.acegwt.client.ace.ui.UI'/>
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
   <source path='shared'/>

@@ -25,19 +25,25 @@ import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.RequiresResize;
+import edu.ycp.cs.dh.acegwt.client.ace.ui.gwt.EditorPanel;
 
 /**
- * A GWT widget for the Ajax.org Code Editor (ACE).
+ * A GWT widget for the Ajax.org Code EditorPanel (ACE).
  *
- * @see <a href="http://ace.ajax.org/">Ajax.org Code Editor</a>
+ * @see <a href="http://ace.ajax.org/">Ajax.org Code EditorPanel</a>
  */
 public class AceEditor extends Composite implements RequiresResize, HasText, TakesValue<String> {
+
+	  private static final EditorPanel DEFAULT_APPERANCE = GWT.create(EditorPanel.class);
+
+	  private EditorPanel apperance;
+
 	// Used to generate unique element ids for Ace widgets.
 	private static int nextId = 0;
 
@@ -59,22 +65,17 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * Preferred constructor.
 	 */
 	public AceEditor() {
-		elementId = "_aceGWT" + nextId;
+	    this(DEFAULT_APPERANCE);
 		nextId++;
-		FlowPanel div = new FlowPanel();
-		div.getElement().setId(elementId);
-		initWidget(div);
-		divElement =  div.getElement();
 	}
 
-	/**
-	 * Do not use this constructor: just use the default constructor.
-	 * @param unused this parameter is ignored
-	 */
-	@Deprecated
-	public AceEditor(boolean unused) {
-		this();
-	}
+	  public AceEditor(EditorPanel apperance) {
+	    this.apperance = apperance;
+		elementId = "_aceGWT" + nextId;
+	    apperance.getElement().setId(elementId);
+	    initWidget(this.apperance.uiBinder().createAndBindUi(this));
+		divElement =  apperance.getElement();
+	  }
 
 	/**
 	 * Call this method to start the editor.
