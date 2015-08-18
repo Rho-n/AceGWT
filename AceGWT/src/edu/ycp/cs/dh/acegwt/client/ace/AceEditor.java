@@ -1,4 +1,5 @@
-// Copyright (c) 2011-2014, David H. Hovemeyer <david.hovemeyer@gmail.com>
+// Copyright (c) 2011-2015, David H. Hovemeyer <david.hovemeyer@gmail.com>;
+//							Roan Horning <roan.horning@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,28 +22,41 @@
 package edu.ycp.cs.dh.acegwt.client.ace;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.InsertPanel;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RequiresResize;
+import com.google.gwt.user.client.ui.Widget;
+
 import edu.ycp.cs.dh.acegwt.client.ace.ui.gwt.EditorPanel;
+import edu.ycp.cs.dh.acegwt.client.ace.ui.gwt.EditorPanelImpl;
 
 /**
- * A GWT widget for the Ajax.org Code EditorPanel (ACE).
+ * A GWT widget for the Ajax.org Code EditorPanelImpl (ACE).
  *
- * @see <a href="http://ace.ajax.org/">Ajax.org Code EditorPanel</a>
+ * @see <a href="http://ace.ajax.org/">Ajax.org Code EditorPanelImpl</a>
  */
-public class AceEditor extends Composite implements RequiresResize, HasText, TakesValue<String> {
+public class AceEditor extends Composite implements RequiresResize, HasText, TakesValue<String>,
+		InsertPanel.ForIsWidget, HasWidgets {
 
-	  private static final EditorPanel DEFAULT_APPERANCE = GWT.create(EditorPanel.class);
+	  private static final EditorPanel DEFAULT_APPEARANCE = GWT.create(EditorPanelImpl.class);
 
-	  private EditorPanel apperance;
+	  private EditorPanel appearance;
+
+	  @UiField
+	  public FlowPanel container;
 
 	// Used to generate unique element ids for Ace widgets.
 	private static int nextId = 0;
@@ -65,18 +79,18 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * Preferred constructor.
 	 */
 	public AceEditor() {
-	    this(DEFAULT_APPERANCE);
+	    this(DEFAULT_APPEARANCE);
 		nextId++;
 	}
 
-	  public AceEditor(EditorPanel apperance) {
-	    this.apperance = apperance;
+	public AceEditor(EditorPanel apperance) {
+		this.appearance = apperance;
 		elementId = "_aceGWT" + nextId;
-	    apperance.getElement().setId(elementId);
-	    initWidget(this.apperance.uiBinder().createAndBindUi(this));
-		divElement =  apperance.getElement();
-	  }
-
+		initWidget(apperance.uiBinder().createAndBindUi(this));
+		container.getElement().setId(elementId);
+		divElement = container.getElement();
+	}
+	
 	/**
 	 * Call this method to start the editor.
 	 * Make sure that the widget has been attached to the DOM tree
@@ -762,4 +776,65 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		
 		return new AceCompletionCallbackImpl(jsCallback);
 	}
+
+	 @Override
+	  public void add(Widget w) {
+		 container.add(w);
+	  }
+
+	  @Override
+	  public void clear() {
+		  container.clear();
+	  }
+
+	  @Override
+	  public Iterator<Widget> iterator() {
+	    return container.iterator();
+	  }
+
+	  @Override
+	  public boolean remove(Widget w) {
+	    return container.remove(w);
+	  }
+
+	@Override
+	public void insert(Widget w, int beforeIndex) {
+	    container.insert(w, beforeIndex);
+	}
+
+	@Override
+	public Widget getWidget(int index) {
+	    return container.getWidget(index);
+	}
+
+	@Override
+	public int getWidgetCount() {
+	    return container.getWidgetCount();
+	}
+
+	@Override
+	public int getWidgetIndex(Widget child) {
+	    return container.getWidgetIndex(child);
+	}
+
+	@Override
+	public boolean remove(int index) {
+	    return container.remove(index);
+	}
+
+	@Override
+	public int getWidgetIndex(IsWidget child) {
+	    return container.getWidgetIndex(child);
+	}
+
+	@Override
+	public void add(IsWidget w) {
+	    container.add(w);
+	}
+
+	@Override
+	public void insert(IsWidget w, int beforeIndex) {
+	    container.insert(w, beforeIndex);
+	}
+
 }

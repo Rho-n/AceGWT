@@ -25,5 +25,6 @@ THE SOFTWARE.
  <module>
   <!-- Eclipse mixes classpaths so we need to exclude tests here -->
   <source path='client'/>
+  <source path='shared'/>
   <inherits name='edu.ycp.cs.dh.acegwt.client.ace.AceEditor' />
   </module>
