@@ -40,20 +40,20 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RequiresResize;
 import com.google.gwt.user.client.ui.Widget;
 
-import edu.ycp.cs.dh.acegwt.client.ace.ui.gwt.EditorPanel;
-import edu.ycp.cs.dh.acegwt.client.ace.ui.gwt.EditorPanelImpl;
+import edu.ycp.cs.dh.acegwt.client.ace.ui.gwt.EditorPanelAppearance;
+import edu.ycp.cs.dh.acegwt.client.ace.ui.gwt.EditorPanelAppearanceImpl;
 
 /**
- * A GWT widget for the Ajax.org Code EditorPanelImpl (ACE).
+ * A GWT widget for the Ajax.org Code EditorPanelAppearanceImpl (ACE).
  *
- * @see <a href="http://ace.ajax.org/">Ajax.org Code EditorPanelImpl</a>
+ * @see <a href="http://ace.ajax.org/">Ajax.org Code EditorPanelAppearanceImpl</a>
  */
 public class AceEditor extends Composite implements RequiresResize, HasText, TakesValue<String>,
 		InsertPanel.ForIsWidget, HasWidgets {
 
-	  private static final EditorPanel DEFAULT_APPEARANCE = GWT.create(EditorPanelImpl.class);
+	  private static final EditorPanelAppearance DEFAULT_APPEARANCE = GWT.create(EditorPanelAppearanceImpl.class);
 
-	  private EditorPanel appearance;
+	  private EditorPanelAppearance appearance;
 
 	  @UiField
 	  public FlowPanel container;
@@ -83,7 +83,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		nextId++;
 	}
 
-	public AceEditor(EditorPanel apperance) {
+	public AceEditor(EditorPanelAppearance apperance) {
 		this.appearance = apperance;
 		elementId = "_aceGWT" + nextId;
 		initWidget(apperance.uiBinder().createAndBindUi(this));

@@ -39,7 +39,7 @@ import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
  * @author Roan Horning
  *
  */
-public class EditorPanelImpl extends Composite implements EditorPanel, HasWidgets, HasText  {
+public class EditorPanelAppearanceImpl extends Composite implements EditorPanelAppearance, HasWidgets, HasText  {
 
 	private static final EditorPanelUiBinder UI_BINDER = GWT.create(EditorPanelUiBinder.class);
 

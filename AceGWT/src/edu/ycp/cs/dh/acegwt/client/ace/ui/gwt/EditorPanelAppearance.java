@@ -5,6 +5,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
 
-public interface EditorPanel {
+public interface EditorPanelAppearance {
 	 UiBinder<Widget, AceEditor> uiBinder();
 }
