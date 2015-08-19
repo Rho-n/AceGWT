@@ -14,9 +14,9 @@ Also, there is [javadoc](http://daveho.github.io/AceGWT/api/).
 
 ## Latest news
 
-17 August 2015:
+18 August 2015:
 
-* Initial implementation of UiBinder code. AceGWTDemo works without modification. Editor can be referenced in a *.ui.xml file but can not be started.
+* Initial implementation of UiBinder code. AceGWTDemo works without modification. Editor can be referenced in another projects *.ui.xml file. The editor is auto-started via the load event.
 
 20 January 2015:
 
