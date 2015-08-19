@@ -14,6 +14,10 @@ Also, there is [javadoc](http://daveho.github.io/AceGWT/api/).
 
 ## Latest news
 
+17 August 2015:
+
+* Initial implementation of UiBinder code. AceGWTDemo works without modification. Editor can be referenced in a *.ui.xml file but can not be started.
+
 20 January 2015:
 
 * Support for selection change events, courtesy of [Roman Sutormin](https://github.com/rsutormin).
