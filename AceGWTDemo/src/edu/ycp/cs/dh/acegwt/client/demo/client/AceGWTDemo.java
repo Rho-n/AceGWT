@@ -101,7 +101,7 @@ public class AceGWTDemo implements EntryPoint {
 		buildUI();
 		
 		// start the first editor and set its theme and mode
-		editor1.startEditor(); // must be called before calling setTheme/setMode/etc.
+		//editor1.startEditor(); // must be called before calling setTheme/setMode/etc.
 		editor1.setTheme(AceEditorTheme.ECLIPSE);
 		editor1.setMode(AceEditorMode.JAVA);
 		
@@ -191,7 +191,7 @@ public class AceGWTDemo implements EntryPoint {
 		// Create some buttons for testing various editor APIs
 		HorizontalPanel buttonPanel = new HorizontalPanel();
 		
-		// Add button to insert text at current cursor position
+		// Add container to insert text at current cursor position
 		Button insertTextButton = new Button("Insert");
 		insertTextButton.addClickHandler(new ClickHandler() {
 			@Override
@@ -213,7 +213,7 @@ public class AceGWTDemo implements EntryPoint {
 		});
 		buttonPanel.add(softTabsBox);
 		
-		// add text box and button to set tab size
+		// add text box and container to set tab size
 		final TextBox tabSizeTextBox = new TextBox();
 		tabSizeTextBox.setWidth("4em");
 		Button setTabSizeButton = new Button("Set tab size");
@@ -227,7 +227,7 @@ public class AceGWTDemo implements EntryPoint {
 		buttonPanel.add(tabSizeTextBox);
 		buttonPanel.add(setTabSizeButton);
 		
-		// add text box and button to go to a given line
+		// add text box and container to go to a given line
 		final TextBox gotoLineTextBox = new TextBox();
 		gotoLineTextBox.setWidth("4em");
 		Button gotoLineButton = new Button("Go to line");
@@ -337,7 +337,7 @@ public class AceGWTDemo implements EntryPoint {
 		mainPanel.add(editor2);
 		mainPanel.add(new Label("Label below!"));
 
-		// Demo button for get number of lines
+		// Demo container for get number of lines
 		final Button appendLineCount = new Button("Append Line Count");
 		appendLineCount.addClickHandler(new ClickHandler() {
 			@Override
