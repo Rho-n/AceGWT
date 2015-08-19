@@ -22,46 +22,28 @@
 package edu.ycp.cs.dh.acegwt.client.ace;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.TakesValue;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasText;
-import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.InsertPanel;
-import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RequiresResize;
-import com.google.gwt.user.client.ui.Widget;
-
+import edu.ycp.cs.dh.acegwt.client.ace.ui.gwt.EditorPanelAbst;
 import edu.ycp.cs.dh.acegwt.client.ace.ui.gwt.EditorPanelAppearance;
-import edu.ycp.cs.dh.acegwt.client.ace.ui.gwt.EditorPanelAppearanceImpl;
 
 /**
  * A GWT widget for the Ajax.org Code EditorPanelAppearanceImpl (ACE).
  *
  * @see <a href="http://ace.ajax.org/">Ajax.org Code EditorPanelAppearanceImpl</a>
  */
-public class AceEditor extends Composite implements RequiresResize, HasText, TakesValue<String>,
-		InsertPanel.ForIsWidget, HasWidgets {
-
-	  private static final EditorPanelAppearance DEFAULT_APPEARANCE = GWT.create(EditorPanelAppearanceImpl.class);
-
-	  private EditorPanelAppearance appearance;
-
-	  @UiField
-	  public FlowPanel container;
+public class AceEditor extends EditorPanelAbst implements RequiresResize, HasText, TakesValue<String> {
 
 	// Used to generate unique element ids for Ace widgets.
 	private static int nextId = 0;
 
-	private final String elementId;
+	private String elementId = "";
 
 	private JavaScriptObject editor;
 
@@ -79,16 +61,21 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * Preferred constructor.
 	 */
 	public AceEditor() {
-	    this(DEFAULT_APPEARANCE);
-		nextId++;
+	    super();
+	    this.init(super.appearance);
 	}
 
 	public AceEditor(EditorPanelAppearance apperance) {
-		this.appearance = apperance;
+		super(apperance);
+		this.init(appearance);
+	}
+	
+	private void init(EditorPanelAppearance appearance) {
+		initWidget(appearance.uiBinder().createAndBindUi(this));
 		elementId = "_aceGWT" + nextId;
-		initWidget(apperance.uiBinder().createAndBindUi(this));
-		container.getElement().setId(elementId);
-		divElement = container.getElement();
+		this.getElement().setId(elementId);
+		divElement = this.getElement();
+		nextId++;	
 	}
 	
 	/**
@@ -776,65 +763,10 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		
 		return new AceCompletionCallbackImpl(jsCallback);
 	}
-
-	 @Override
-	  public void add(Widget w) {
-		 container.add(w);
-	  }
-
-	  @Override
-	  public void clear() {
-		  container.clear();
-	  }
-
-	  @Override
-	  public Iterator<Widget> iterator() {
-	    return container.iterator();
-	  }
-
-	  @Override
-	  public boolean remove(Widget w) {
-	    return container.remove(w);
-	  }
-
+	
 	@Override
-	public void insert(Widget w, int beforeIndex) {
-	    container.insert(w, beforeIndex);
-	}
-
-	@Override
-	public Widget getWidget(int index) {
-	    return container.getWidget(index);
-	}
-
-	@Override
-	public int getWidgetCount() {
-	    return container.getWidgetCount();
-	}
-
-	@Override
-	public int getWidgetIndex(Widget child) {
-	    return container.getWidgetIndex(child);
-	}
-
-	@Override
-	public boolean remove(int index) {
-	    return container.remove(index);
-	}
-
-	@Override
-	public int getWidgetIndex(IsWidget child) {
-	    return container.getWidgetIndex(child);
-	}
-
-	@Override
-	public void add(IsWidget w) {
-	    container.add(w);
-	}
-
-	@Override
-	public void insert(IsWidget w, int beforeIndex) {
-	    container.insert(w, beforeIndex);
+	public void onLoad() {
+		this.startEditor();
 	}
 
 }

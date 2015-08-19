@@ -30,9 +30,12 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
+
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
 
 /**
@@ -41,10 +44,10 @@ import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
  */
 public class EditorPanelAppearanceImpl extends Composite implements EditorPanelAppearance, HasWidgets, HasText  {
 
-	private static final EditorPanelUiBinder UI_BINDER = GWT.create(EditorPanelUiBinder.class);
+	private static final UiBinder<Widget, EditorPanelAbst> UI_BINDER = GWT.create(EditorPanelUiBinder.class);
 
 	@Override
-	public UiBinder<Widget, AceEditor> uiBinder() {
+	public UiBinder<Widget, EditorPanelAbst> uiBinder() {
 		return UI_BINDER;
 	}
 
@@ -54,7 +57,7 @@ public class EditorPanelAppearanceImpl extends Composite implements EditorPanelA
 
 	@UiField
 	FlowPanel container;
-
+	
 	@Override
 	public String getText() {
 		// TODO Auto-generated method stub
@@ -85,6 +88,11 @@ public class EditorPanelAppearanceImpl extends Composite implements EditorPanelA
 	@Override
 	public boolean remove(Widget w) {
 		return container.remove(w);
+	}
+
+	@Override
+	public FlowPanel getContainer() {
+		return container;
 	}
 
 }
