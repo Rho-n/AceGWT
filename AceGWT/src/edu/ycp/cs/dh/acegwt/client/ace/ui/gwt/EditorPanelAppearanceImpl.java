@@ -25,17 +25,15 @@ package edu.ycp.cs.dh.acegwt.client.ace.ui.gwt;
 import java.util.Iterator;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
-
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
 
 /**
@@ -43,6 +41,19 @@ import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
  *
  */
 public class EditorPanelAppearanceImpl extends Composite implements EditorPanelAppearance, HasWidgets, HasText  {
+
+	static {
+		Resources.INSTANCE.css().ensureInjected();
+	}
+
+	interface Resources extends ClientBundle {
+
+		Resources INSTANCE = GWT.create(Resources.class);
+
+		@Source({"EditorPanel.css"})
+		EditorPanelCss css();
+
+	}	
 
 	private static final UiBinder<Widget, EditorPanelAbst> UI_BINDER = GWT.create(EditorPanelUiBinder.class);
 
@@ -57,7 +68,7 @@ public class EditorPanelAppearanceImpl extends Composite implements EditorPanelA
 
 	@UiField
 	FlowPanel container;
-	
+
 	@Override
 	public String getText() {
 		// TODO Auto-generated method stub
@@ -93,6 +104,11 @@ public class EditorPanelAppearanceImpl extends Composite implements EditorPanelA
 	@Override
 	public FlowPanel getContainer() {
 		return container;
+	}
+
+	@Override
+	public EditorPanelCss css() {
+		return Resources.INSTANCE.css();
 	}
 
 }

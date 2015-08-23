@@ -22,12 +22,25 @@ package edu.ycp.cs.dh.acegwt.client.ace.ui.gwt;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public interface EditorPanelAppearance {
-	 UiBinder<Widget, EditorPanelAbst> uiBinder();
+	  public interface EditorPanelCss extends CssResource {
+
+		  @ClassName("ace_flexible")
+		  String editorFlexible();
+		  
+		  @ClassName("ace_editor")
+		  String editor();
+
+	  }
+
+	  EditorPanelCss css();	 
+	  
+	  UiBinder<Widget, EditorPanelAbst> uiBinder();
 	 
 	 public FlowPanel getContainer();
 }
